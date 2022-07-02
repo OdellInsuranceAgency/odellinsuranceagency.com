@@ -4,6 +4,7 @@ import NavigationBar from "../components/NavigationBar";
 import Copyright from "../components/Copyright";
 import TestimonialBox from "../components/TestimonialBox";
 import styles from "./contact.module.css";
+import Link from "next/link";
 
 const mail: string = `
 mailto:Robert@odellinsuranceagency.com?cc=&lt;Your Email Address&gt;&amp;subject=Sent From odellinsuranceagency.com&amp;body=Hello Mr. Robert Odell.%0a%0aI would like to take part in your no cost, no obligation review and assessment of my health care insurance portfolio.%0a%0aYou may reach me by phone at &lt;Your Phone Number&gt;.%0a%0a%0a%0aThank You,%0a%0a&lt;Your Name&gt;
@@ -40,7 +41,7 @@ const Contact: NextPage = () => {
                                 503-281-1409 fax<br/>
                                 www.srcfab.com
                             </>}>
-                                &quot;I have relied on <a href="/bob">Bob Odell</a> for nearly
+                                &quot;I have relied on <Link href="/bob"><a>Bob Odell</a></Link> for nearly
                                 25 years to handle my group health insurance requirements.&nbsp;
                                 He is both knowledgeable and professional and always seems to find a way to
                                 make things work for us in some very difficult market situations.&nbsp; I
