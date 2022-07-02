@@ -1,0 +1,26 @@
+.id_form_item label {
+    display: block;
+    font-weight: bold;
+}
+
+.id_form_item input {
+    display: block;
+    font-size: 16px;
+}
+
+.id_sign_up_container {
+    padding-top: 40px;
+}
+
+.emphasis {
+    font-weight: bold;
+    font-size: 16pt;
+    color: #00F;
+    letter-spacing: 2px;
+}
+
+.emphasis2 {
+    font-weight: bold;
+    font-size: 16pt;
+    letter-spacing: 2px;
+}
