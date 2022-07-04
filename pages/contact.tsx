@@ -6,9 +6,36 @@ import TestimonialBox from "../components/TestimonialBox";
 import styles from "./contact.module.css";
 import Link from "next/link";
 
-const mail: string = `
-mailto:Robert@odellinsuranceagency.com?cc=&lt;Your Email Address&gt;&amp;subject=Sent From odellinsuranceagency.com&amp;body=Hello Mr. Robert Odell.%0a%0aI would like to take part in your no cost, no obligation review and assessment of my health care insurance portfolio.%0a%0aYou may reach me by phone at &lt;Your Phone Number&gt;.%0a%0a%0a%0aThank You,%0a%0a&lt;Your Name&gt;
-`;
+const mailTo: string = "robert@odellinsuranceagency.com";
+const mailSubject = "Sent From odellinsuranceagency.com";
+const crlf = "%0d%0a";
+
+function getMailLink(name: string, email: string, phone: string): string {
+    if (name.length === 0) {
+        name = "<Your Name>";
+    }
+    if (email.length === 0) {
+        email = "<Your Email Address>";
+    }
+    if (phone.length === 0) {
+        phone = "<Your Phone Number>";
+    }
+    // Note: The body string cannot be indented in code.
+    // Backslashes prevent newlines being automatically added to body.
+    const body = `\
+Hello Mr. Robert Odell.${crlf}\
+${crlf}\
+I would like to take part in your no cost, no obligation review and assessment of my health care insurance portfolio.${crlf}\
+${crlf}\
+You may reach me by phone at ${phone}.${crlf}\
+${crlf}\
+${crlf}\
+${crlf}\
+Thank You,${crlf}\
+${crlf}\
+${name}`;
+    return `mailto:${mailTo}?cc=${email}&subject=${mailSubject}&body=${body}`;
+}
 
 const Contact: NextPage = () => {
     return <div id="pagewrapper">
@@ -90,7 +117,8 @@ const Contact: NextPage = () => {
                             <div className={styles.id_sign_up_container}>
                                 <span className={styles.emphasis}>To send a more personalized request,</span>
                                 <span style={{display: "block"}}>use the email link provided here:</span>
-                                <a className={styles.emphasis2} href={mail}>Robert@odellinsuranceagency.com</a>
+                                <a className={styles.emphasis2}
+                                   href={getMailLink("", "", "")}>Robert@odellinsuranceagency.com</a>
                             </div>
                             <div className={styles.id_sign_up_container}>
                                 <span className={styles.emphasis}>Call or Write Us Today!</span><br/>
