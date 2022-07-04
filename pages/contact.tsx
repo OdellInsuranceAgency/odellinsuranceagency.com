@@ -100,7 +100,7 @@ const Contact: NextPage = () => {
                                 <form id="id_contactus" action="contactus.php" acceptCharset="UTF-8" method="post">
                                     <div className={styles.id_form_item}>
                                         <label htmlFor="edit-name">Your Name:</label>
-                                        <input name="name" maxLength={80} value="" type="text" size={50}/>
+                                        <input name="name" maxLength={80} type="text" size={50}/>
                                     </div>
                                     <div className={styles.id_form_item}>
                                         <label htmlFor="edit-email">Email Address:</label>
