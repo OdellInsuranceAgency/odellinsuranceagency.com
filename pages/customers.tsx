@@ -26,56 +26,66 @@ const Customers: NextPage = () => {
                     <div className="colpadding">
                         <div style={{float: "left", width: "450px"}}>
                             <a href="https://www.milwaukeecrane.com">
-                                <div className="logo"><img src="/images/milwaukee crane.jpg" title="Milwaukee Crane"/>
+                                <div className="logo">
+                                    <img src="/images/milwaukee crane.jpg" title="Milwaukee Crane"/>
                                 </div>
                             </a>
                             <a href="https://www.tvtdiecast.com">
-                                <div className="logo"><img src="/images/tvtdiecasting.jpg" title="TVT Die Casting"/>
+                                <div className="logo">
+                                    <img src="/images/tvtdiecasting.jpg" title="TVT Die Casting"/>
                                 </div>
                             </a>
-                            <a href="https://www.lambsmarkets.com">
-                                <div className="logo"><img src="/images/lambs.jpg" title="Lambs Markets"/></div>
-                            </a>
-                            <a href="https://www.rbslumber.com">
-                                <div className="logo"><img src="/images/rosenbergbuilders.jpg"
-                                                           title="Rosenberg Builders"/></div>
+                            {/*<a href="https://www.lambsmarkets.com">*/}
+                            {/*    <div className="logo"><img src="/images/lambs.jpg" title="Lambs Markets"/></div>*/}
+                            {/*</a>*/}
+                            <a href="https://www.rbslumber.com/">
+                                <div className="logo">
+                                    <img src="/images/rosenbergbuilders.jpg" title="Rosenberg Builders"/>
+                                </div>
                             </a>
                             <a href="https://www.da-pdx.com">
-                                <div className="logo"><img src="/images/dermatologyassociates.jpg"
-                                                           title="Dermatology Associates"/></div>
-                            </a>
-                            <a href="https://www.van-port.com">
-                                <div className="logo"><img src="/images/vanportdesign.jpg" title="Van-Port Design"/>
+                                <div className="logo">
+                                    <img src="/images/dermatologyassociates.jpg" title="Dermatology Associates"/>
                                 </div>
                             </a>
-                            <a href="https://www.precisionpowderinc.com">
-                                <div className="logo"><img src="/images/precisionpowder.jpg"
-                                                           title="Precision Powder Coating, Inc."/></div>
+                            <a href="https://vanportdesign.com/">
+                                <div className="logo">
+                                    <img src="/images/vanportdesign.jpg" title="Van-Port Design"/>
+                                </div>
                             </a>
                         </div>
                         <div style={{float: "right", width: "450px"}}>
-                            <a href="https://www.srcfab.com">
-                                <div className="logo"><img src="/images/src.jpg" title="Scientific Research Company"/>
+                            <a href="https://srcfab.com/">
+                                <div className="logo">
+                                    <img src="/images/src.jpg" title="Scientific Research Company"/>
                                 </div>
                             </a>
-                            <a href="https://www.pro-lineswa.com">
-                                <div className="logo"><img src="/images/pro line.jpg" title="Pro-Lines"/></div>
-                            </a>
-                            <a href="https://www.wereorganizedinc.com">
-                                <div className="logo"><img src="/images/wereorganized.jpg" title="We're Organized"/>
+                            {/*<a href="https://www.pro-lineswa.com">*/}
+                            {/*    <div className="logo"><img src="/images/pro line.jpg" title="Pro-Lines"/></div>*/}
+                            {/*</a>*/}
+                            <a href="https://www.wereorganized.com/">
+                                <div className="logo">
+                                    <img src="/images/wereorganized.jpg" title="We're Organized"/>
                                 </div>
                             </a>
                             <a href="https://www.crystalgreenslandscape.com">
-                                <div className="logo"><img src="/images/crystalgreens.jpg"
-                                                           title="Crystal Greens Landscaping"/></div>
+                                <div className="logo">
+                                    <img src="/images/crystalgreens.jpg" title="Crystal Greens Landscaping"/>
+                                </div>
                             </a>
-                            <a href="https://tsgrayconstruction.com">
-                                <div className="logo"><img src="/images/tsgrayconstruction.jpg"
-                                                           title="TS Gray Construction"/></div>
+                            {/*<a href="https://tsgrayconstruction.com">*/}
+                            {/*    <div className="logo"><img src="/images/tsgrayconstruction.jpg"*/}
+                            {/*                               title="TS Gray Construction"/></div>*/}
+                            {/*</a>*/}
+                            <a href="http://www.osmpi.com/home.html">
+                                <div className="logo">
+                                    <img src="/images/oregonscrew.jpg" title="Oregon Screw Machine Products Inc."/>
+                                </div>
                             </a>
-                            <a href="https://www.osmpi.com/home.html">
-                                <div className="logo"><img src="/images/oregonscrew.jpg"
-                                                           title="Oregon Screw Machine Products Inc."/></div>
+                            <a href="http://www.precisionpowderinc.com">
+                                <div className="logo">
+                                    <img src="/images/precisionpowder.jpg" title="Precision Powder Coating, Inc."/>
+                                </div>
                             </a>
                         </div>
                         {/*Removed Items*/}
