@@ -13,7 +13,7 @@ const Bob: NextPage = () => {
             <div id="content-padding">
                 <div id="content">
                     <div className="colpadding" style={{textAlign: "center"}}>
-                        <img src="/pictures/tennis.jpg" height="800px" title="Bob in Action!"/>
+                        <img src="/pictures/tennis.jpg" height="800px" alt="Bob in Action!"/>
                     </div>
                 </div>
             </div>
