@@ -8,6 +8,9 @@
     "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
+    // Next.js rules
+    "@next/next/no-img-element": "off",
+
     // TypeScript-ESLint supported rules
     "@typescript-eslint/array-type": [
       "error",
