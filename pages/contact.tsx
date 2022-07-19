@@ -5,21 +5,34 @@ import Copyright from "../components/Copyright";
 import TestimonialBox from "../components/TestimonialBox";
 import styles from "./contact.module.css";
 import Link from "next/link";
+import {useState} from "react";
 
 const mailTo: string = "robert@odellinsuranceagency.com";
-const mailSubject = "Sent From odellinsuranceagency.com";
-const crlf = "%0d%0a";
+const subject = "Sent From odellinsuranceagency.com";
+const crlf = "\r\n";
 
 function getMailLink(name: string, email: string, phone: string): string {
+    name = name.trim();
+    email = email.trim();
+    phone = phone.trim();
+
     if (name.length === 0) {
-        name = "<Your Name>";
+        name = "<Unprovided>";
     }
-    if (email.length === 0) {
-        email = "<Your Email Address>";
+
+    let reachMethod = "Please reach out to me at your convenience.";
+    if (email.length != 0) {
+        if (phone.length != 0) {
+            reachMethod = `You may reach me by phone at ${phone} or by email at ${email}.`;
+        } else {
+            reachMethod = `You may reach me by email at ${email}.`;
+        }
+    } else {
+        if (phone.length != 0) {
+            reachMethod = `You may reach me by phone at ${phone}.`;
+        }
     }
-    if (phone.length === 0) {
-        phone = "<Your Phone Number>";
-    }
+
     // Note: The body string cannot be indented in code.
     // Backslashes prevent newlines being automatically added to body.
     const body = `\
@@ -27,17 +40,54 @@ Hello Mr. Robert Odell.${crlf}\
 ${crlf}\
 I would like to take part in your no cost, no obligation review and assessment of my health care insurance portfolio.${crlf}\
 ${crlf}\
-You may reach me by phone at ${phone}.${crlf}\
+${reachMethod}${crlf}\
 ${crlf}\
 ${crlf}\
 ${crlf}\
 Thank You,${crlf}\
 ${crlf}\
 ${name}`;
-    return `mailto:${mailTo}?cc=${email}&subject=${mailSubject}&body=${body}`;
+
+    const encodedMailTo = encodeURIComponent(mailTo);
+    const encodedSubject = encodeURIComponent(subject);
+    const encodedBody = encodeURIComponent(body);
+
+    return `mailto:${encodedMailTo}?subject=${encodedSubject}&body=${encodedBody}`;
+}
+
+function onChangeName(name: string): string {
+    const allowedChars: string = " -'0123456789";
+    let filteredName: string = "";
+    // keep all the allowed characters that were entered...
+    for (const character of name) {
+        if (character.toUpperCase() != character.toLowerCase() || allowedChars.indexOf(character) != -1) {
+            filteredName += character;
+        }
+    }
+    return filteredName;
+}
+
+function onChangeEmail(email: string): string {
+    return email;
+}
+
+function onChangePhone(phone: string): string {
+    const allowedChars: string = "0123456789()- extEXT#";
+    let filteredPhone: string = "";
+    // keep all the allowed characters that were entered...
+    for (const character of phone) {
+        if (allowedChars.indexOf(character) != -1) {
+            filteredPhone += character;
+        }
+    }
+    return filteredPhone;
 }
 
 const Contact: NextPage = () => {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+
     return <div id="pagewrapper">
         <Head>
             <title>Contact Us - Odell Insurance Agency</title>
@@ -94,35 +144,54 @@ const Contact: NextPage = () => {
                                     <span>
                                         for a no cost, no obligation review and assessment of your
                                         health care insurance portfolio, fill in your information below
-                                        and press the &quot;Sign up&quot; button.
+                                        and press the email link.
                                     </span>
                                 </p>
-                                <form id="id_contactus" action="contactus.php" acceptCharset="UTF-8" method="post">
+                                <form id="id_contactus" acceptCharset="UTF-8" method="post">
                                     <div className={styles.id_form_item}>
                                         <label htmlFor="edit-name">Your Name:</label>
-                                        <input name="name" maxLength={80} type="text" size={50}/>
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            value={name}
+                                            maxLength={60}
+                                            size={50}
+                                            onChange={(e) => setName(onChangeName(e.target.value))}
+                                        />
                                     </div>
                                     <div className={styles.id_form_item}>
                                         <label htmlFor="edit-email">Email Address:</label>
-                                        <input name="email" maxLength={200} type="text" size={50}/>
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            value={email}
+                                            maxLength={100}
+                                            size={50}
+                                            onChange={(e) => setEmail(onChangeEmail(e.target.value))}
+                                        />
                                     </div>
                                     <div className={styles.id_form_item}>
                                         <label htmlFor="edit-phone">Phone Number:</label>
-                                        <input name="phone" maxLength={40} type="text" size={40}/>
+                                        <input
+                                            type="tel"
+                                            name="phone"
+                                            value={phone}
+                                            maxLength={30}
+                                            size={30}
+                                            onChange={(e) => setPhone(onChangePhone(e.target.value))}
+                                        />
                                     </div>
-                                    <input style={{marginTop: "10px"}} name="submit"
-                                           value="Sign up for your free Assessment..." type="submit"/>
                                 </form>
                             </div>
                             <div className={styles.id_sign_up_container}>
-                                <span className={styles.emphasis}>To send a more personalized request,</span>
+                                <span className={styles.emphasis}>To request your personalized and free Assessment,</span>
                                 <span style={{display: "block"}}>use the email link provided here:</span>
                                 <a className={styles.emphasis2}
-                                   href={getMailLink("", "", "")}>Robert@odellinsuranceagency.com</a>
+                                   href={getMailLink(name, email, phone)}>Robert@odellinsuranceagency.com</a>
                             </div>
                             <div className={styles.id_sign_up_container}>
                                 <span className={styles.emphasis}>Call or Write Us Today!</span><br/>
-                                <span><img src="/images/oldenglish.png"/></span>dell Insurance Agency<br/>
+                                <span><img src="/images/oldenglish.png" alt="O"/></span>dell Insurance Agency<br/>
                                 c/o Robert Odell<br/>
                                 14850 SW 100th Ave<br/>
                                 Tigard, OR 97224-4714<br/>
