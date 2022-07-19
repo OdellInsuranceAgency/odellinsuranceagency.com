@@ -11,7 +11,7 @@ const mailTo: string = "robert@odellinsuranceagency.com";
 const subject = "Sent From odellinsuranceagency.com";
 const crlf = "\r\n";
 
-function getMailLink(name: string, email: string, phone: string,): string {
+function getMailLink(name: string, email: string, phone: string): string {
     name = name.trim();
     email = email.trim();
     phone = phone.trim();
