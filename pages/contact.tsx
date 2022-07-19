@@ -8,23 +8,29 @@ import Link from "next/link";
 import {useState} from "react";
 
 const mailTo: string = "robert@odellinsuranceagency.com";
-const mailSubject = "Sent From odellinsuranceagency.com";
-const crlf = "%0d%0a";
+const subject = "Sent From odellinsuranceagency.com";
+const crlf = "\r\n";
 
-function getMailLink(name: string, email: string, phone: string): string {
+function getMailLink(name: string, email: string, phone: string,): string {
+    name = name.trim();
+    email = email.trim();
+    phone = phone.trim();
+
     if (name.length === 0) {
         name = "<Unprovided>";
     }
 
-    let reachMethod = "";
-    if (phone.length == 0 && email.length == 0) {
-        reachMethod = "Please reach out to me at your convenience.";
-    } else if (phone.length == 0 && email.length != 0) {
-        reachMethod = `You may reach me by email at ${email}.`;
-    } else if (phone.length != 0 && email.length == 0) {
-        reachMethod = `You may reach me by phone at ${phone}.`;
+    let reachMethod = "Please reach out to me at your convenience.";
+    if (email.length != 0) {
+        if (phone.length != 0) {
+            reachMethod = `You may reach me by phone at ${phone} or by email at ${email}.`;
+        } else {
+            reachMethod = `You may reach me by email at ${email}.`;
+        }
     } else {
-        reachMethod = `You may reach me by phone at ${phone} or by email at ${email}.`;
+        if (phone.length != 0) {
+            reachMethod = `You may reach me by phone at ${phone}.`;
+        }
     }
 
     // Note: The body string cannot be indented in code.
@@ -41,7 +47,40 @@ ${crlf}\
 Thank You,${crlf}\
 ${crlf}\
 ${name}`;
-    return `mailto:${mailTo}?subject=${mailSubject}&body=${body}`;
+
+    const encodedMailTo = encodeURIComponent(mailTo);
+    const encodedSubject = encodeURIComponent(subject);
+    const encodedBody = encodeURIComponent(body);
+
+    return `mailto:${encodedMailTo}?subject=${encodedSubject}&body=${encodedBody}`;
+}
+
+function onChangeName(name: string): string {
+    const allowedChars: string = " -'0123456789";
+    let filteredName: string = "";
+    // keep all the allowed characters that were entered...
+    for (const character of name) {
+        if (character.toUpperCase() != character.toLowerCase() || allowedChars.indexOf(character) != -1) {
+            filteredName += character;
+        }
+    }
+    return filteredName;
+}
+
+function onChangeEmail(email: string): string {
+    return email;
+}
+
+function onChangePhone(phone: string): string {
+    const allowedChars: string = "0123456789()- extEXT#";
+    let filteredPhone: string = "";
+    // keep all the allowed characters that were entered...
+    for (const character of phone) {
+        if (allowedChars.indexOf(character) != -1) {
+            filteredPhone += character;
+        }
+    }
+    return filteredPhone;
 }
 
 const Contact: NextPage = () => {
@@ -117,7 +156,7 @@ const Contact: NextPage = () => {
                                             value={name}
                                             maxLength={60}
                                             size={50}
-                                            onChange={(e) => setName(e.target.value)}
+                                            onChange={(e) => setName(onChangeName(e.target.value))}
                                         />
                                     </div>
                                     <div className={styles.id_form_item}>
@@ -128,7 +167,7 @@ const Contact: NextPage = () => {
                                             value={email}
                                             maxLength={100}
                                             size={50}
-                                            onChange={(e) => setEmail(e.target.value)}
+                                            onChange={(e) => setEmail(onChangeEmail(e.target.value))}
                                         />
                                     </div>
                                     <div className={styles.id_form_item}>
@@ -137,9 +176,9 @@ const Contact: NextPage = () => {
                                             type="tel"
                                             name="phone"
                                             value={phone}
-                                            maxLength={20}
-                                            size={20}
-                                            onChange={(e) => setPhone(e.target.value)}
+                                            maxLength={30}
+                                            size={30}
+                                            onChange={(e) => setPhone(onChangePhone(e.target.value))}
                                         />
                                     </div>
                                 </form>
